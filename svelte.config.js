@@ -1,4 +1,6 @@
-import preprocess from 'svelte-preprocess'
+import preprocess from 'svelte-preprocess';
+
+const {typescript, scss} = preprocess;
 
 const isDevelopment = true;
 
@@ -7,11 +9,14 @@ const config = {
     compilerOptions: {
         dev: isDevelopment,
     },
-    preprocess: preprocess({
-        typescript: {
+    preprocess: [
+        typescript({
             tsconfigFile: true
-        }
-    })
+        }),
+        scss({
+            includePaths: ['src/client/scss', 'node_modules']
+        })
+    ]
 }
 
 export default config;

@@ -14,7 +14,6 @@ const config = {
         file: 'public/build/bundle.js',
     },
     plugins: [
-        //replacer for %...%,
         svelte(svelteConfig),
         css({
             output: "bundle.css"
