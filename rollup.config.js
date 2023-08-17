@@ -43,7 +43,7 @@ async function startDevSever() {
                 import('node:child_process').then(
                     cp => {
                         cp.spawn('npm', ['run', 'serve'], {
-                            stdio: ['ignore', 'inherit', 'inherit'],
+                            stdio: ['inherit', 'inherit', 'inherit'],
                             shell: true
                         })
                     }
