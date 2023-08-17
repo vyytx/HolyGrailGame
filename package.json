@@ -6,6 +6,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "rollup -c",
+		"dev": "rollup -c -w",
 		"serve": "node --loader ts-node/esm ./src/server/app.ts"
 	},
 	"author": "",
