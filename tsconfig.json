@@ -5,7 +5,5 @@
 		"moduleResolution": "NodeNext",
 		"target": "ES2022"
     },
-    "include": [
-        "./src/server/*.ts"
-    ]
+    "include": ["src/**/*.ts"]
 }
