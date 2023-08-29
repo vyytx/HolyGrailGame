@@ -1,0 +1,7 @@
+// shutup vscode
+{
+    "compilerOptions": {
+        "noEmit": true,
+        "allowImportingTsExtensions": true,
+    }
+}

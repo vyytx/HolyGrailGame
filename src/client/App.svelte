@@ -1,6 +1,7 @@
 <script lang='ts'>
     import {Router, Route} from "svelte-routing";
     import HomePage from "./pages/HomePage.svelte";
+    import LoginPage from "./pages/LoginPage.svelte"
 
     import 'bulma/css/bulma.css';
     
@@ -10,6 +11,9 @@
 <Router url="{url}" basepath="/game">
     <Route path="/">
         <HomePage />
+    </Route>
+    <Route path="/login">
+        <LoginPage />
     </Route>
     <Route path="/about">
         <!-- <AboutPage/> -->
