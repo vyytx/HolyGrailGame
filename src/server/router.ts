@@ -1,9 +1,17 @@
 import express from 'express';
 
+import { loadAllApi } from './api/api.js';
+
 const router = express.Router();
 
-router.get('/hello', async (req, res) => {
-    res.send('hello')
-})
+router.post('/login', async (req, res) => {
+    console.log("req.body:", req.body)
+});
+
+router.post('/register',async (req, res) => {
+    
+});
+
+loadAllApi(router);
 
 export default router;
