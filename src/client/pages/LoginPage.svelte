@@ -2,7 +2,7 @@
     import axios from 'axios';
 
     import FormLogin from "../components/FormLogin.svelte";
-    import { readURLQuery } from '../ts/util.ts';
+    import { readURLQuery } from '../ts/util';
 
     const {fromURL, toURL} = readURLQuery(location.search);
 
