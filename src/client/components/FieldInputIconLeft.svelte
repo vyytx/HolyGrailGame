@@ -1,13 +1,16 @@
-<script lang='ts' context='module'>
+<script lang='ts'>
     import { HTMLInputTypeAttribute } from 'svelte/elements';
     import { SvelteComponentTyped } from 'svelte/internal';
     type Icon = SvelteComponentTyped<{size?: string, strokeWidth?: number, class?: string}>;
 
-    // export let type: HTMLInputTypeAttribute = "text";
+    export let type: HTMLInputTypeAttribute = "text";
+    export let icon: Icon;
+    export let placeholder: string = "";
+    export let _value = undefined;
 
-    // const handleType = node => {
-    //     node.type = type;
-    // }
+    const handleType = node => {
+        node.type = type;
+    }
 </script>
 
 <div class="field">
@@ -15,13 +18,6 @@
         <span class="icon is-left">
             <svelte:component this={icon} />
         </span>
-        <!-- use:handleType -->
-        <input class="input" {placeholder} bind:value={_value}>
+        <input class="input" {placeholder} bind:value={_value} use:handleType>
     </div>
 </div>
-
-<script lang='ts'>
-    export let icon: Icon;
-    export let placeholder: string = "";
-    export let _value;
-</script>
