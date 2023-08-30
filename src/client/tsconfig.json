@@ -1,6 +1,9 @@
 // shutup vscode
 {
     "compilerOptions": {
+        "module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"target": "ES2022",
         "noEmit": true,
         "allowImportingTsExtensions": true,
     }
