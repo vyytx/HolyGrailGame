@@ -4,3 +4,7 @@ export enum UserType {
     Master,
     Servant,
 }
+
+export type TDashboardData = {
+    position: string
+}

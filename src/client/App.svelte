@@ -9,14 +9,9 @@
 </script>
 
 <Router url="{url}" basepath="/game">
-    <Route path="/">
-        <HomePage />
-    </Route>
-    <Route path="/login">
-        <LoginPage />
-    </Route>
-    <Route path="/about">
-        <!-- <AboutPage/> -->
-        <h1>absout page</h1>
+    <Route path="/" component="{HomePage}" />
+    <Route path="/login" component="{LoginPage}" />
+    <Route>
+        <h1>Not Foundy</h1>
     </Route>
 </Router>

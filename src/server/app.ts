@@ -28,7 +28,7 @@ app.use('/game/assets', express.static(path.join(__dirname, '..', 'client', 'ass
 // if(!isProduction)
 //     app.use(errorHandler()) // TODO: Make this work
 
-app.use((req, res, next) => {
+app.use(settings['CLIENT_BASE_URL'], (req, res, next) => {
     res.sendFile(path.join(__dirname, '..', '..', 'public', 'index.html'));
 });
 

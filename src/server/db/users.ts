@@ -9,7 +9,7 @@ type TypeUserDB = {
     username: string;
     password: string;
     userType: UserType;
-    uuid: string;
+    loginToken: string;
 }[]
 
 export const usersDB = new LowWithLodash<TypeUserDB>(dbPath, [
@@ -17,6 +17,6 @@ export const usersDB = new LowWithLodash<TypeUserDB>(dbPath, [
         username: 'admin',
         password: 'admin',
         userType: UserType.Admin,
-        uuid: '00000000-0000-0000-0000-000000000000'
+        loginToken: undefined
     }
 ]);
