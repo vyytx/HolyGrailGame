@@ -9,8 +9,8 @@
 </script>
 
 <Router url="{url}" basepath="/game">
-    <Route path="/" component="{HomePage}" />
-    <Route path="/login" component="{LoginPage}" />
+    <Route path="/" component={HomePage} />
+    <Route path="/login" component={LoginPage} />
     <Route>
         <h1>Not Foundy</h1>
     </Route>
