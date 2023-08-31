@@ -1,4 +1,5 @@
 import path from 'path'
+import {v4 as uuid} from 'uuid';
 
 import { UserType } from '../game/static.js';
 import { __dirname, LowWithLodash } from './databases.js';
@@ -17,6 +18,6 @@ export const usersDB = new LowWithLodash<TypeUserDB>(dbPath, [
 		username: 'admin',
 		password: 'admin',
 		userType: UserType.Admin,
-		loginToken: undefined
+		loginToken: uuid()
 	}
 ]);

@@ -6,7 +6,7 @@
 	export let type: HTMLInputTypeAttribute = "text";
 	export let icon: Icon;
 	export let placeholder: string = "";
-	export let _value = undefined;
+	export let value = undefined;
 
 	const handleType = node => {
 		node.type = type;
@@ -18,6 +18,6 @@
 		<span class="icon is-left">
 			<svelte:component this={icon} />
 		</span>
-		<input class="input" {placeholder} bind:value={_value} use:handleType>
+		<input class="input" {placeholder} bind:value use:handleType>
 	</div>
 </div>

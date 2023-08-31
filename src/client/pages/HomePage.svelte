@@ -3,6 +3,7 @@
 
 	const loginToken = localStorage.getItem('loginToken');
 	
+	//TODO: fix here
 	const loadDashboard = new Promise<void>((resolve, reject) => {
 		axios.post('/api/account/fetchDashboard', {loginToken})
 			.then(data => {
@@ -21,7 +22,7 @@
 {#await loadDashboard}
 	loading
 {:catch err}
-	{location.href = 'login'}
+	{location.href = `login?toURL=${encodeURIComponent('/game')}`}
 {/await}
 
 <style lang='scss'>

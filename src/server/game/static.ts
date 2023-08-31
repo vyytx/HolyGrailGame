@@ -1,8 +1,7 @@
 export enum UserType {
 	Admin,
 	GM,
-	Master,
-	Servant,
+	Normal
 }
 
 export type TDashboardData = {

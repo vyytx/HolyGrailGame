@@ -18,12 +18,9 @@ const app = express();
 // TODO add this
 // app.use(cors());
 
-app.use(bodyParser.json())
-
 app.use(settings['CLIENT_BASE_URL'], express.static(path.join(__dirname, '..', '..', 'public')));
 app.use(settings['SERVER_BASE_URL'], router);
 app.use('/game/assets', express.static(path.join(__dirname, '..', 'client', 'assets')))
-
 
 // if(!isProduction)
 //     app.use(errorHandler()) // TODO: Make this work
