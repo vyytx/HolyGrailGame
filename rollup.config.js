@@ -3,6 +3,9 @@ import svelteConfig from './svelte.config.js'
 import css from "rollup-plugin-css-only";
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import typescript from '@rollup/plugin-typescript';
+
+import tsconfigJSON from './tsconfig.json' assert { type: 'json' }
 
 const isDev = process.env.ROLLUP_WATCH;
 
@@ -27,9 +30,13 @@ const config = {
             browser: true,
             dedupe: ['svelte']
         }),
+        typescript(tsconfigJSON),
         commonjs(),
         isDev && await startDevSever()
-    ]
+    ],
+    watch: {
+        clearScreen: true
+    }
 }
 
 async function startDevSever() {

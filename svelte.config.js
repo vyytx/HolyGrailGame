@@ -12,7 +12,6 @@ const config = {
     preprocess: [
         typescript({
             tsconfigFile: true,
-            // TODO: FIX HERE
         }),
         scss({
             includePaths: ['src/client/scss', 'node_modules']
