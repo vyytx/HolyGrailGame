@@ -2,7 +2,7 @@
     import axios from 'axios';
 
     import FormLogin from "../components/FormLogin.svelte";
-    import { readURLQuery } from '../ts/util';
+    import { readURLQuery } from '../ts/util.ts';
 
     const {fromURL, toURL} = readURLQuery(location.search);
 
@@ -26,7 +26,9 @@
 <section class="hero is-fullheight">
     <div class="hero-body">
         <div class="container">
-            <FormLogin {loginFunc} {registerFunc} hasRegisterBtn/>
+            <div class="column is-4 is-offset-4 has-text-centered">
+                <FormLogin {loginFunc} {registerFunc} hasRegisterBtn/>
+            </div>
         </div>
     </div>
 </section>
