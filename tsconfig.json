@@ -1,10 +1,10 @@
 {
-    "compilerOptions": {
-        "module": "NodeNext",
+	"compilerOptions": {
+		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
 		"target": "ES2022",
-        "noEmit": true,
-        "allowImportingTsExtensions": true
-    },
-    "include": ["src/**/*.ts"]
+		"noEmit": true,
+		"allowImportingTsExtensions": true
+	},
+	"include": ["src/**/*.ts"]
 }

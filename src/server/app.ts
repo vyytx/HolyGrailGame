@@ -29,13 +29,13 @@ app.use('/game/assets', express.static(path.join(__dirname, '..', 'client', 'ass
 //     app.use(errorHandler()) // TODO: Make this work
 
 app.use(settings['CLIENT_BASE_URL'], (req, res, next) => {
-    res.sendFile(path.join(__dirname, '..', '..', 'public', 'index.html'));
+	res.sendFile(path.join(__dirname, '..', '..', 'public', 'index.html'));
 });
 
 const server = app.listen(settings['SERVER_PORT'], () => {
-    const { port } = server.address() as AddressInfo
+	const { port } = server.address() as AddressInfo
 
-    console.log('Server listening on port ' + port);
-    console.log('Client exposed on ' + settings['EXTERNAL_URL'] + settings.CLIENT_BASE_URL);
-    console.log('Server exposed on ' + settings['EXTERNAL_URL'] + settings.SERVER_BASE_URL);
+	console.log('Server listening on port ' + port);
+	console.log('Client exposed on ' + settings['EXTERNAL_URL'] + settings.CLIENT_BASE_URL);
+	console.log('Server exposed on ' + settings['EXTERNAL_URL'] + settings.SERVER_BASE_URL);
 })

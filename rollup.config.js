@@ -11,53 +11,53 @@ const isDev = process.env.ROLLUP_WATCH;
 
 /**@type {import('rollup').RollupOptions} */
 const config = {
-    input: 'src/client/main.js',
-    output: {
-        sourcemap: true,
-        format: 'iife',
-        name: 'app',
-        file: 'public/build/bundle.js',
-    },
-    plugins: [
-        svelte({
-            dev: isDev,
-            ...svelteConfig
-        }),
-        css({
-            output: "bundle.css"
-        }),
-        resolve({
-            browser: true,
-            dedupe: ['svelte']
-        }),
-        typescript(tsconfigJSON),
-        commonjs(),
-        isDev && await startDevSever()
-    ],
-    watch: {
-        clearScreen: true
-    }
+	input: 'src/client/main.js',
+	output: {
+		sourcemap: true,
+		format: 'iife',
+		name: 'app',
+		file: 'public/build/bundle.js',
+	},
+	plugins: [
+		svelte({
+			dev: isDev,
+			...svelteConfig
+		}),
+		css({
+			output: "bundle.css"
+		}),
+		resolve({
+			browser: true,
+			dedupe: ['svelte']
+		}),
+		typescript(tsconfigJSON),
+		commonjs(),
+		isDev && await startDevSever()
+	],
+	watch: {
+		clearScreen: true
+	}
 }
 
 async function startDevSever() {
-    let started = false;
+	let started = false;
 
-    return {
-        writeBundle() {
-            if(!started) {
-                started = true;
+	return {
+		writeBundle() {
+			if(!started) {
+				started = true;
 
-                import('node:child_process').then(
-                    cp => {
-                        cp.spawn('npm', ['run', 'serve'], {
-                            stdio: ['inherit', 'inherit', 'inherit'],
-                            shell: true
-                        })
-                    }
-                );
-            }
-        }
-    }
+				import('node:child_process').then(
+					cp => {
+						cp.spawn('npm', ['run', 'serve'], {
+							stdio: ['inherit', 'inherit', 'inherit'],
+							shell: true
+						})
+					}
+				);
+			}
+		}
+	}
 }
 
 
