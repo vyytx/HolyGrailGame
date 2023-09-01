@@ -3,7 +3,6 @@ import { fileURLToPath } from 'url';
 import { AddressInfo } from 'net'
 
 import express from 'express';
-import bodyParser from 'body-parser';
 
 import router from './router.js'
 import settings from './settings.js';

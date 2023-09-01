@@ -12,6 +12,6 @@
 	<Route path="/" component={HomePage} />
 	<Route path="/login" component={LoginPage} />
 	<Route>
-		<h1>Not Foundy</h1>
+		<h1>Not Found</h1>
 	</Route>
 </Router>
