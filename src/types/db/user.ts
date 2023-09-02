@@ -1,4 +1,4 @@
-export enum UserType {
+export enum TUserType {
 	ADMIN,
 	GM,
 	NORMAL

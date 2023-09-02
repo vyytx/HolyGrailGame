@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 import { userDB } from '../db/user.ts';
 import { IExpressHandler } from '../../types/api/api.ts';
 import { FlowCheckToken, FlowFetchDashboard, FlowLogin, FlowRegister, TDashboardData } from '../../types/api/account.ts';
-import { UserType } from '../../types/db/user.ts';
+import { TUserType } from '../../types/db/user.ts';
 
 
 const fetchDashboard: IExpressHandler<FlowFetchDashboard> = (req, res) => {
@@ -44,7 +44,7 @@ const register: IExpressHandler<FlowRegister> = (req, res) => {
 		userDB.data.push({
 			username,
 			password,
-			userType: UserType.NORMAL,
+			userType: TUserType.NORMAL,
 			loginToken
 		})
 		user.loginToken = loginToken;
