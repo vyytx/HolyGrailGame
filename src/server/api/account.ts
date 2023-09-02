@@ -1,35 +1,35 @@
 import { Router } from 'express'
 import { v4 as uuid } from 'uuid';
 
-import { usersDB } from '../db/users.js';
+import { userDB } from '../db/user.ts';
 import { IExpressHandler } from '../../types/api/api.ts';
-import { FlowCheckToken, FlowFetchDashboard, FlowLogin, FlowRegister } from '../../types/api/account.ts';
+import { FlowCheckToken, FlowFetchDashboard, FlowLogin, FlowRegister, TDashboardData } from '../../types/api/account.ts';
 import { UserType } from '../../types/db/user.ts';
 
 
 const fetchDashboard: IExpressHandler<FlowFetchDashboard> = (req, res) => {
 	const {loginToken} = req.body;
 	
-	const user = usersDB.chain.find(_user => _user.loginToken === loginToken);
+	const user = userDB.data.find(u => u.loginToken === loginToken);
 
-	if(user.value() === undefined) {
+	if(user === undefined) {
 		res.sendStatus(401);
 	}else {
 		// TODO: add dashboard data
-		res.status(200).send(undefined);
+		res.status(200).send({} as TDashboardData);
 	}
 }
 
 const login: IExpressHandler<FlowLogin> = (req, res) => {
 	const {username, password} = req.body;
 
-	const user = usersDB.chain.find(_user => _user.username === username && _user.password === password);
+	const user = userDB.data.find(_user => _user.username === username && _user.password === password);
 
-	if(user.value() === undefined) {
+	if(user === undefined) {
 		res.sendStatus(401);
 	}else {
 		const loginToken = uuid();
-		user.update('loginToken', loginToken);
+		user.loginToken = loginToken;
 		res.status(200).send({loginToken});
 	}
 }
@@ -37,17 +37,17 @@ const login: IExpressHandler<FlowLogin> = (req, res) => {
 const register: IExpressHandler<FlowRegister> = (req, res) => {
 	const {username, password}: {username: string, password: string} = req.body;
 	
-	const user = usersDB.chain.find(_user => _user.username === username);
+	const user = userDB.data.find(_user => _user.username === username);
 
-	if(user.value() === undefined) {
+	if(user === undefined) {
 		const loginToken = uuid() as string;
-		usersDB.chain.push({
+		userDB.data.push({
 			username,
 			password,
 			userType: UserType.NORMAL,
 			loginToken
 		})
-		user.set('loginToken', loginToken);
+		user.loginToken = loginToken;
 		res.status(200).send({loginToken});
 	}else {
 		res.sendStatus(406);
@@ -57,12 +57,9 @@ const register: IExpressHandler<FlowRegister> = (req, res) => {
 const checkToken: IExpressHandler<FlowCheckToken> = (req, res) => {
 	const {loginToken} = req.body;
 	
-	const user = usersDB.chain.find(_user => _user.loginToken === loginToken);
+	const user = userDB.data.find(_user => _user.loginToken === loginToken);
 	
-	console.log(usersDB.data)
-	console.log(loginToken, user.value() === undefined)
-
-	if(user.value() === undefined) {
+	if(user === undefined) {
 		res.send(false);
 	}else {
 		res.send(true);
