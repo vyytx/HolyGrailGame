@@ -2,14 +2,13 @@ import { Router } from 'express'
 import { v4 as uuid } from 'uuid';
 
 import { usersDB } from '../db/users.js';
-import { TDashboardData, UserType } from '../game/static.js';
-import { ExpressHandler } from './api.js';
+import { IExpressHandler } from '../../types/api/api.ts';
+import { FlowCheckToken, FlowFetchDashboard, FlowLogin, FlowRegister } from '../../types/api/account.ts';
+import { UserType } from '../../types/db/user.ts';
 
-const fetchDashboard: ExpressHandler<TDashboardData> = (req, res) => {
+
+const fetchDashboard: IExpressHandler<FlowFetchDashboard> = (req, res) => {
 	const {loginToken} = req.body;
-
-	console.log(usersDB.data);
-	console.log(loginToken)
 	
 	const user = usersDB.chain.find(_user => _user.loginToken === loginToken);
 
@@ -21,7 +20,7 @@ const fetchDashboard: ExpressHandler<TDashboardData> = (req, res) => {
 	}
 }
 
-const login: ExpressHandler<any> = (req, res) => {
+const login: IExpressHandler<FlowLogin> = (req, res) => {
 	const {username, password} = req.body;
 
 	const user = usersDB.chain.find(_user => _user.username === username && _user.password === password);
@@ -30,12 +29,12 @@ const login: ExpressHandler<any> = (req, res) => {
 		res.sendStatus(401);
 	}else {
 		const loginToken = uuid();
-		user.set('loginToken', loginToken);
+		user.update('loginToken', loginToken);
 		res.status(200).send({loginToken});
 	}
 }
 
-const register: ExpressHandler<any> = (req, res) => {
+const register: IExpressHandler<FlowRegister> = (req, res) => {
 	const {username, password}: {username: string, password: string} = req.body;
 	
 	const user = usersDB.chain.find(_user => _user.username === username);
@@ -45,7 +44,7 @@ const register: ExpressHandler<any> = (req, res) => {
 		usersDB.chain.push({
 			username,
 			password,
-			userType: UserType.Normal,
+			userType: UserType.NORMAL,
 			loginToken
 		})
 		user.set('loginToken', loginToken);
@@ -55,8 +54,26 @@ const register: ExpressHandler<any> = (req, res) => {
 	}
 }
 
+const checkToken: IExpressHandler<FlowCheckToken> = (req, res) => {
+	const {loginToken} = req.body;
+	
+	const user = usersDB.chain.find(_user => _user.loginToken === loginToken);
+	
+	console.log(usersDB.data)
+	console.log(loginToken, user.value() === undefined)
+
+	if(user.value() === undefined) {
+		res.send(false);
+	}else {
+		res.send(true);
+	}
+}
+
 export default function (router: Router) {
-	router.post('/account/fetchDashboard', fetchDashboard);
+	router.post('/account/checkToken', checkToken)
+
 	router.post('/account/login', login);
 	router.post('/account/register', register);
+
+	router.post('/account/fetchDashboard', fetchDashboard);
 }
