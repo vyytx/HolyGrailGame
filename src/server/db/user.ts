@@ -4,7 +4,7 @@ import {v4 as uuid} from 'uuid';
 import { __dirname, LowExp } from './databases.js';
 import { UserType } from '../../types/db/user.ts';
 
-const dbPath = path.join(__dirname, 'storage', 'users.json');
+const dbPath = path.join(__dirname, 'storage', 'user.json');
 
 type TypeUserDB = {
 	username: string;
