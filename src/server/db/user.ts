@@ -6,14 +6,16 @@ import { TUserType } from '../../types/db/user.ts';
 
 const dbPath = path.join(__dirname, 'storage', 'user.json');
 
-type TypeUserDB = {
-	username: string;
-	password: string;
-	userType: TUserType;
-	loginToken: string;
-}[]
+export type TUserData = {
+	username: string,
+	password: string,
+	userType: TUserType,
+	loginToken: string
+}
 
-export const userDB = new LowExp<TypeUserDB>(dbPath, [
+type TUserDB = TUserData[]
+
+export const userDB = new LowExp<TUserDB>(dbPath, [
 	{
 		username: 'admin',
 		password: 'admin',
