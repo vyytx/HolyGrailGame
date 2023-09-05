@@ -19,7 +19,7 @@ export const userDB = new LowExp<TUserDB>(dbPath, [
 	{
 		username: 'admin',
 		password: 'admin',
-		userType: TUserType.ADMIN,
+		userType: 'ADMIN',
 		loginToken: uuid()
 	}
 ]);

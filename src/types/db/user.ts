@@ -1,5 +1,1 @@
-export enum TUserType {
-	ADMIN,
-	GM,
-	NORMAL
-}
+export type TUserType = "ADMIN" | "GM" | "NORMAL";

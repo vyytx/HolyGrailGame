@@ -2,7 +2,8 @@ import { TUserType } from "../db/user.ts";
 import { FlowCS } from "./api.ts";
 
 export type TDashboardData = {
-	userType: TUserType
+	userType: TUserType,
+	isPlayer: boolean
 }
 
 export type MSGloginTokenOnly = {

@@ -4,7 +4,6 @@ import { v4 as uuid } from 'uuid';
 import { userDB } from '../db/user.ts';
 import { IExpressHandler } from '../../types/api/api.ts';
 import { FlowCheckToken, FlowFetchDashboard, FlowLogin, FlowRegister, TDashboardData } from '../../types/api/account.ts';
-import { TUserType } from '../../types/db/user.ts';
 
 
 const fetchDashboard: IExpressHandler<FlowFetchDashboard> = (req, res) => {
@@ -16,7 +15,11 @@ const fetchDashboard: IExpressHandler<FlowFetchDashboard> = (req, res) => {
 		res.sendStatus(401);
 	}else {
 		// TODO: add dashboard data
-		res.status(200).send({} as TDashboardData);
+		// TODO: build GameDB and link isPlayer status to
+		res.status(200).send({
+			userType: user.userType,
+			isPlayer: false
+		} as TDashboardData);
 	}
 }
 
@@ -44,7 +47,7 @@ const register: IExpressHandler<FlowRegister> = (req, res) => {
 		userDB.data.push({
 			username,
 			password,
-			userType: TUserType.NORMAL,
+			userType: 'NORMAL',
 			loginToken
 		})
 		user.loginToken = loginToken;
