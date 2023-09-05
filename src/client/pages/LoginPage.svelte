@@ -19,11 +19,6 @@
 				console.error(err);
 			})
 	}
-
-	async function clk() {
-		const loginToken = localStorage.getItem('loginToken');
-		console.log(await axios.post('/api/account/checkToken', {loginToken}))
-	}
 </script>
 
 <svelte:head>
@@ -34,7 +29,6 @@
 	<div class="hero-body">
 		<div class="container">
 			<div class="column is-4 is-offset-4 has-text-centered">
-				<button class="button" on:click={clk}>click</button>
 				<FormLogin 
 					loginFunc={(u, p) => loginOrRegister('login', u, p)}
 					registerFunc={(u, p) => loginOrRegister('register', u, p)}
