@@ -2,7 +2,7 @@ node_modules
 .vscode
 
 public/build
-src/server/db/storage
+src/server/db/storage/*
 test
 
 
