@@ -15,15 +15,28 @@ interface IMapDB {
 }
 
 class MapData implements IMapDB {
-	width: number;
-	height: number;
 	private rawData: TMapTile[][] = []
-	
-	get data(): TMapTile[][] {
-	
+
+	get height() {
+		return this.rawData.length
+	}
+
+	get width() {
+		if(this.height == 0)
+			return 0;
+		else
+			return this.rawData[0].length;
+	}
+
+	get data() {
+		return [...this.rawData]
 	}
 }
 
-// export const MapDB = new LowExp<IMapDB>(dbPath, );
+ export const MapDB = new LowExp<IMapDB>(dbPath, {
+	width: 0,
+	height: 0,
+	data: []
+ });
 
 MapDB.write();
