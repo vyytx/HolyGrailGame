@@ -4,7 +4,12 @@
 		"moduleResolution": "NodeNext",
 		"target": "ES2022",
 		"noEmit": true,
-		"allowImportingTsExtensions": true
+		"allowImportingTsExtensions": true,
+		"paths": {
+			"#client/*": ["./src/client/*"],
+			"#server/*": ["./src/server/*"],
+			"#types/*": ["./src/types/*"]
+		}
 	},
 	"include": ["src/**/*.ts"]
 }

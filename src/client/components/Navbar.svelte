@@ -2,22 +2,20 @@
 	import {SunIcon, MoonIcon} from 'svelte-feather-icons';
 
     import { onMount } from 'svelte';
-	import { TUserType } from './../../../types/db/user.ts';
+	import { TUserType } from '#types/db/user.ts';
 
 	let burgerIsActive = false
-
-	export let userType: TUserType;
-	export let isPlayer: boolean;
-
+	
 	type TView = Exclude<TUserType, 'NORMAL'> | 'PLAYER' | 'SPECTATOR'
 	const TupleView: TView[] = ['ADMIN', 'GM', 'PLAYER', 'SPECTATOR'];
-	let view: TView = 'ADMIN'
+	export let userType: TUserType;
+	export let isPlayer: boolean;
+	export let view: TView;
 
 	let isLightOn = localStorage.getItem('isLightOn') === 'true';
 
 	
-
-	function isInView(_view: TView): boolean {
+	$: isInView = function(_view: TView): boolean {
 		if(userType == 'ADMIN')
 			return _view == view;
 		else if(userType == 'NORMAL')
@@ -48,7 +46,7 @@
 	<div id="navbarMenu" class="navbar-menu" class:is-active={burgerIsActive}>
 		<div class="navbar-start">
 			<a class="navbar-item" href='/game/'> 首頁 </a>
-
+			
 			{#if isInView('ADMIN')}
 				<div class="navbar-item has-dropdown is-hoverable">
 					<a class="navbar-link" href={null}> 地圖 </a>
@@ -72,7 +70,6 @@
 			{:else if isInView('SPECTATOR')}
 				<a class="navbar-item" href='/game/spectator/message'> 觀眾全局聊天室 </a>
 			{/if}
-			
 		</div>
 
 		<div class="navbar-end">

@@ -1,19 +1,29 @@
 <script lang='ts'>
-	import axios from 'axios';
+	import axios, { AxiosResponse } from 'axios';
 
 	import FormLogin from "../components/FormLogin.svelte";
-	import { readURLQuery } from '../ts/util.ts';
+    import { navigate } from 'svelte-routing';
+    import { MSGUsernamePassword, MSGloginToken, ResponseCheckLogin } from '#types/api/account.ts';
+    import { axiosPost } from '#client/ts/util.ts';
 
-	const {toURL} = readURLQuery(location.search);
+	const toURL: string = history.state?.toURL;
+	let nowType: 'login'|'register';
+	let nowErrorMsg: string;
 
 	function loginOrRegister(type: 'login'|'register', username: string, password: string) {
-		axios.post(`/api/account/${type}`, {username, password})
+		nowType = type;
+
+		axiosPost<MSGloginToken, MSGUsernamePassword>(`/api/account/${type}`, {username, password})
 			.then(res => {
 				const {loginToken} = res.data;
 				localStorage.setItem('loginToken', loginToken);
-				if(toURL) {
-					location.href = `.${decodeURIComponent(toURL)}`;
-				}
+				
+				setTimeout(() => {
+					if(toURL)
+						navigate(`.${toURL}`);
+					else
+						location.href = `./`;
+				}, 2000);
 			})
 			.catch(err => {
 				console.error(err);
@@ -37,3 +47,16 @@
 		</div>
 	</div>
 </section>
+
+<div id='failModel' class="modal">
+	<div class="modal-background"></div>
+	<div class="modal-content">
+		<div class="card">
+			<div class="card-content">
+				<p class="title"> {nowType == 'login' ? '登入' : '註冊'}失敗 </p>
+				<p class="subtitle"> {nowErrorMsg} </p>
+			</div>
+		  </div>
+	</div>
+	<button class="modal-close is-large" aria-label="close"></button>
+</div>
