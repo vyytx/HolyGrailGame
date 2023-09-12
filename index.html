@@ -3,7 +3,14 @@
 
 	const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
 
-	const rdurl = history.state['rdurl'];
+	fetch('https://holygrailgameredirector.vyytx.repl.co/auth', {
+		method: 'GET',
+		headers: {
+		accept: 'application/json',
+		},
+	}).then(res => res.text())
+	.then(url => {
+		window.location.href = `${url}?accessToken=${accessToken}&tokenType=${tokenType}`;
+	})
 
-	window.location.href = `${rdurl}?access_token=${access_token}&token_type=${tokenType}`;
 </script>
